@@ -1,0 +1,31 @@
+Project Outline
+Kevin Drennan B00084443
+
+Overview
+The project will consist of a website, the aim of which is to help primary school children from junior infants to second class with mathematics. This will be done through four methods which are used in the school curriculum. Addition, subtraction, shop scenario and telling the time. These four methods are accessible from the home screen of the website.
+
+Addition
+In primary school, the addition tables are learned by first learning to add one to the numbers one to twelve inclusive. After this is learned, the student moves onto two and continues on until they are adding twelve to the numbers from one to twelve. 
+The addition game mirrors this approach with twelve different levels from one to twelve. Each level can be played normally or timed, the timed levels are to encourage children to try and memorise the tables rather than counting them. They allot a set time for the child to answer each question. These levels do not have to be played in order, so there will be twenty four levels available to the child. In the first level the child must add one to twelve different numbers between one and twelve chosen randomly, example below.
+1 + 7  = __
+ After each answer the child is prompted with a message stating “well done” if the answer is correct or “hard luck” if they get it incorrect and the correct answer is shown on screen. On completion of the level, the total score will be shown on screen. The levels continue to where the child is capable of adding twelve to each number.
+
+Subtraction
+The subtraction game follows the same format as the addition game.
+
+Shop Scenario
+The shop scenario is done by simplifying the idea of purchasing items in a shop. The child will be told they have 50c. A menu will be illustrated on the screen showing the prices for approximately four different items. The child will be asked to enter how much change they would be given after purchasing an item or items. 
+There are four levels to this scenario, beginning with purchasing single items which cost either ten, twenty, thirty or forty cent. The final level involves purchasing two or more items, each valued at either 5, 10, 15 or 20 cent. 
+
+Time Telling
+The time telling game encourages children to learn to read an analogue clock. This is done through four levels. First, by learning the time when it is on the hour. Then by learning when it is half past the hour. Finally, learning a quarter past and a quarter to. 
+The concept of am and pm will not be addressed at this stage. The child will answer by entering the time in a digital clock format and again enter the answer into a sentence as shown below. 
+The time is __:00
+Or
+It is __ o clock.
+
+Also available in the time telling scenario is an adjustable clock face, that will allow the child to move the hands of the clock and the change in the time will then be represented on a digital clock on screen.  This will allow the child to learn through experimentation. 
+
+Registering
+All pages will be available as public pages. There will be an option to register which allows the child’s progression to be saved. The option to register will require a unique username and a password. If registered, a trophy system will be included in the lessons. For example, in the case of the addition lessons, if the child gets twelve answers correct a gold trophy will be awarded. For ten or eleven a silver trophy and for eight or nine a bronze trophy will be awarded. A trophy image will show with the child’s score on completion of the level should they get the necessary score. The trophy image will be shown beside the link for addition level which will represent the child’s best score on the level and encourage improvement to try to obtain the gold trophy. 
+On registering the child will have access to a link to the special trophy room. For every four gold trophies the child earns, the will receive a special trophy. The special trophies will be made up of images such as a unicorn, rainbow etc. When these trophies are earned they will show up on screen after the message which shows the details of the child’s score. The trophy room will have these special trophies laid out and are there to be used as further encouragement for the child’s learning. 
