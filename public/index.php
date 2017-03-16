@@ -31,8 +31,6 @@ switch ($action){
         break;
 
     case 'additionPage':
-        $addNum = filter_input(INPUT_GET, 'addNum', FILTER_SANITIZE_STRING);
-        var_dump($addNum);
         $html = $mainController->additionPage_action($twig);
         break;
 

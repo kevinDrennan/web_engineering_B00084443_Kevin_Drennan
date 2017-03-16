@@ -19,6 +19,16 @@
 
     <h1>TEST {{ addNum }}</h1>
 
+    <form action="../public/index.php" method="GET">
+        <h1>{{ addNum }} +  {{ arrayRandNum[randomNum] }}=</h1>
+        <input type = "hidden" name = "addNum" value={{ addNum }}>
+        <input type = "hidden" name = "randomNum" value= {{ arrayRandNum[randomNum] }}>
+        <input type="text"  name = "answer" autofocus>
+        <input type="hidden" name="action" value="additionPage">
+        <input type="submit">
+    </form>
+
+    <p>score = {{ arrayRandNum[score] }}</p>
 
 </main>
 <footer>

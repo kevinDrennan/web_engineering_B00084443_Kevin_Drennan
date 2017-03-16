@@ -1,5 +1,14 @@
 <?php
 
+/*
+ *
+ *
+ * answer not getting through from additionPage
+ *
+ *
+ *
+ */
+
 namespace Itb;
 
 require_once __DIR__ . "/../app/setup.php";
@@ -42,13 +51,47 @@ class MainController
         return $twig->render($template . '.html.twig', $argsArray);
     }
 
-    public function additionPage_action(\Twig_Environment $twig)
+    /*public function additionPage_action(\Twig_Environment $twig)
     {
         $template = 'additionPage';
-        //$addNum = $_GET['addNum'];
-        //var_dump($addNum);
-        $argsArray = [];
-        //$argsArray = ['addNum' => $addNum];
+        // below also in addition controller function
+        //$answer = filter_input(INPUT_GET, 'answer', FILTER_SANITIZE_STRING);
+        $addNum = filter_input(INPUT_GET, 'addNum', FILTER_SANITIZE_STRING);
+
+        $numArray = array();
+        $additionController = new \Itb\AdditionController($addNum);
+        //$answer = (int)$answer;
+        if (empty($answer)) {
+            //$additionController = new \Itb\AdditionController($addNum);
+            $numArray = $additionController->createAndShuffleArray();
+            var_dump('testAnswerIsEmpty');
+        }
+        /*elseif(!empty($answer)){
+            var_dump('TestAnswer!Empty');
+        }
+
+        $arrayRandNumScore = $additionController->additionLayout($numArray);
+        //var_dump( "score&ranNumInMCAddPageAction =" . $arrayRandNumScore);
+
+        $argsArray = [
+
+            'addNum' => $addNum,
+            'arrayRandNumScore' => $arrayRandNumScore
+        ];
+        return $twig->render($template . '.html.twig', $argsArray);
+    }*/
+
+
+
+    public function nextAddQuestion(\Twig_Environment $twig, array $numArray, int $addNum)
+    {
+
+        $this->$addNum=$addNum;
+        $template = 'additionPage';
+
+        $argsArray = [
+            'addNum' => $addNum,
+        ];
         return $twig->render($template . '.html.twig', $argsArray);
     }
 }

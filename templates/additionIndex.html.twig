@@ -10,6 +10,7 @@
 </head>
 
 <body>
+<script>alert("Hello World")</script>
 
 <header>
 
@@ -25,7 +26,7 @@
             <form action="../public/index.php?action=additionPage" method="GET">
                 <input type="hidden" name="addNum" value= {{ num }}>
 
-                <a href="../public/index.php?action=additionPage">+ {{ num }}</a>
+                <a href="../public/index.php?action=additionPage&addNum={{ num }}">+ {{ num }}</a>
             </form>
 
 
