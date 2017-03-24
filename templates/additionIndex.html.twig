@@ -7,26 +7,24 @@
     <style>
 
     </style>
+    <script src="../src/AdditionTest.js"></script>
 </head>
 
 <body>
-<script>alert("Hello World")</script>
-
-<header>
-
-</header>
 
 <main>
 
     <nav>
         <ul>
         {% for num in numArray %}
-            <!--<li><a href="../public/index.php?action=additionPage"> + {{ num }} </a></li>-->
+            <!--<li><a href="../public/index.php?action=additionPage"> + {{ num }} </a></li>
 
-            <form action="../public/index.php?action=additionPage" method="GET">
+            <form action="../public/index.php?action=additionTest" method="GET">-->
+            <form>
                 <input type="hidden" name="addNum" value= {{ num }}>
 
-                <a href="../public/index.php?action=additionPage&addNum={{ num }}">+ {{ num }}</a>
+                <!--<a href="../templates/additionTest.html?addNum={{ num }}">+ {{ num }}</a>-->
+                <a href="../templates/additionTest.html" onclick="runAdditionTest({{ num }})">{{ num }}</a>
             </form>
 
 
