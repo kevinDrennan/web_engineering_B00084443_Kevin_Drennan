@@ -12,31 +12,32 @@ switch ($action){
 
     //shop page
     case 'additionIndex':
-        $html = $mainController->additionIndex_action($twig);
+        $html = $mainController->additionIndexAction($twig);
         break;
 
     //home page
-    case 'subtractionIndex':
-        $html = $mainController->subtractionIndex_action($twig);
-        break;
+   /* case 'subtractionIndex':
+        $html = $mainController->subtractionIndexAction($twig);
+        break;  */
 
     //contact us page
     case 'shop':
-        $html = $mainController->shop_action($twig);
+        $html = $mainController->shopAction($twig);
         break;
 
     //contact us page
     case 'clock':
-        $html = $mainController->clock_action($twig);
+        $html = $mainController->clockAction($twig);
         break;
 
-    case 'additionPage':
-        $html = $mainController->additionPage_action($twig);
-        break;
+    /*case 'additionTest':
+        var_dump($action);
+        $html = $mainController->additionTestAction($twig);
+        break;*/
 
     case 'index':
     default:
-        $html = $mainController->index_action($twig);
+        $html = $mainController->indexAction($twig);
 }
 
 print $html;
