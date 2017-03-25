@@ -12,7 +12,6 @@ define('DB_NAME', 'itb');
 define('DB_USER', 'fred');
 define('DB_PASS', 'smith');
 
-//no autoloader added, one in his sample not in notes
 require_once __DIR__ . "/../vendor/autoload.php";
 
 $myTemplatesPath = __DIR__ . "/../templates";
