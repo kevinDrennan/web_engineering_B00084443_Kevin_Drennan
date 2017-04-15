@@ -1,0 +1,58 @@
+
+{% extends 'admin/_adminBase.html.twig' %}
+{% block pageTitle %} Register {% endblock %}
+
+
+{% block main %}
+<main>
+
+    <form  action="/registerUser" method="post">
+
+        <p>
+            first name:
+            <input type="text" name="firstName" autocomplete="off" required>
+        </p>
+
+        <p>
+            surname:
+            <input type="text" name="surname" autocomplete="off" required>
+        </p>
+
+        <p>
+            college id:
+            <input type="text" name="collegeId" autocomplete="off" required>
+        </p>
+
+        <p>
+            user role:
+            <select name="role" required>
+                <option value = 1>Student</option>
+                <option value = 2>Lecturer</option>
+                <option value = 3>Admin</option>
+            </select>
+        </p>
+
+        <p>
+            email:
+            <input type="email" name="email" autocomplete="off" required>
+        </p>
+
+        <p>
+            password:
+            <input type="password" name="password" required>
+        </p>
+
+        <p>
+            repeat password:
+            <input type="password" name="password_repeat" required>
+        </p>
+
+        <input type="submit" value="register">
+
+    </form>
+
+    <i>{{ message }}</i>
+</main>
+
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'admin/_adminBase.html.twig' %}
+{% block pageTitle %} Admin Page {% endblock %}
+{% block main %}
+    <main>
+        <br>
+        <table>
+            <tr>
+                <th>College ID</th>
+                <th>First name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+
+            <tr>
+                <td>{{ user.collegeId }}</td>
+                <td>{{ user.firstName}}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+            </tr>
+
+        </table>
+        <br>
+        <p><a href="/deleteUser/{{ user.id }}">Delete User From Database</a> </p>
+        <br>
+        <p><a href="/updateUserAction/{{ user.id }}">Update user details</a> </p>
+
+    </main>
+{% endblock %}

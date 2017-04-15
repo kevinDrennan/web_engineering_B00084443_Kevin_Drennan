@@ -1,34 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <title> Maths4Kids </title>
-    <meta charset="utf-8">
-    <style>
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Home Page {% endblock %}
 
-    </style>
-</head>
-
-<body>
-
-<header>
-
-</header>
-
+{% block main %}
 <main>
+    <h3><a href="/login">Login</a></h3>
+    <h3><a href="/proposeTag">Propose a new tag</a></h3>
+    <h3><a href="/viewProposedTags">View and vote on proposed tags</a></h3>
+    <h3><a href="/proposeRef">Propose a new REF</a></h3>
 
-    <nav>
-        <a href="/index.php?action=additionIndex">Addition</a>
-        <a href="../public/index.php?action=subtractionIndex">Subtraction</a>
-        <a href="../public/index.php?action=shop">Shop</a>
-        <a href="../public/index.php?action=clock">Clock</a>
-    </nav>
 </main>
-<footer>
-    <hr>
-    <a href="mailto:B00084443@student.itb.ie">Email</a>
-    Kevin Drennan B00084443
-    <a href="index.html.twig?action=sitemap">sitemap</a>
-</footer>
-</body>
-</html>
+
+
+{% endblock %}

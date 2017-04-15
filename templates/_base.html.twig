@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <style>
+        @import '/css/style.css';
+        @import '/css/nav.css';
+    </style>
+    <title>{% block pageTitle %}{% endblock %}</title>
+</head>
+
+<body>
+<header>
+
+    <section class="blockContainer">
+        <nav>
+            <section class="flexContainer">
+                <section class="bigFlex"><section class="headingContainer">
+                    <h1>Bibliography Manager</h1></section></section>
+
+            <section class="smallFlex">
+                <a href="/login">Login</a>
+                <a href="/logout">Logout</a>
+            </section>
+
+        </nav>
+    </section>
+
+    <section class="blockContainer">
+        <nav>
+            <ul>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+
+                <li>
+                    <a href="/about">About</a>
+                </li>
+            </ul>
+        </nav>
+    </section>
+</header>
+
+{% block main %}
+{% endblock %}
+<footer>
+    <hr>
+    <a href="mailto:B00084443@student.itb.ie">Email</a>
+    Kevin Drennan B00084443
+    <a href="index.html.twig?action=sitemap">sitemap</a>
+    <p>you are logged in as: <strong> {{ collegeId }}</strong></p>
+</footer>
+</body>
+</html>

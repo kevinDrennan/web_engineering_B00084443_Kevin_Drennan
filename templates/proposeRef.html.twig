@@ -1,0 +1,88 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} New Ref {% endblock %}
+
+{% block main %}
+    <main>
+        <section class="flexContainer">
+            <section class="smallFlex">
+                <form  action="/processProposedRef" method="post">
+                    <p>
+                        Author :
+                        <br>
+                        <input type="text" name="refAuthor" autocomplete="off" required>
+                    </p>
+
+                    <p>
+                        Title :
+                        <br>
+                        <input type="text" name="refTitle" autocomplete="off" required>
+                    </p>
+
+                    <p>
+                        Year of Publication :
+                        <br>
+                        <input type="text" name="refYear" autocomplete="off" min="4" max="4" required>
+                    </p>
+
+
+                    <p>
+                        Publisher :
+                        <br>
+                        <input type="text" name="refPublisher" autocomplete="off" required>
+                    </p>
+                    </section>
+                    <section class="smallFlex">
+
+                    <p>
+                        Place of Publication :
+                        <br>
+                        <input type="text" name="refPlaceOfPublication" autocomplete="off" required>
+                    </p>
+                        Tags :
+                        <br>
+                        <div style="height: 4em; width: 12em; overflow: auto;">
+                            {% for tag in tags %}
+                                <input type="checkbox" name="tags[]" value={{ tag.id }}>
+                                <label>{{ tag.tagName }}</label>
+                                <br>
+                            {% endfor %}
+                        </div>
+
+
+        <!--<p>
+                                <br>
+                        <div style="height: 4em; width: 12em; overflow: auto;">
+                            { for tag in tags %}
+                            <input type="checkbox" name="tagInput" value="{ tag.id }}" />
+                            <label>{ tag.tagName }}</label>
+                            <br>
+                            { endfor %}
+                        </div>
+                        Tags :
+                        <br>
+                        <select name="tags"  size="4" multiple="">
+                            {? for tag in tags %}
+                                {? dump(tag) }}
+                            <option value="{? tag.id }}">{? tag.tagName }}</option>
+
+                            {? endfor %}
+                        </select>
+                    </p>            -->
+
+                    <p>
+                        Reference Summary :
+                        <br>
+                        <textarea rows="6" cols="80" name="refSummary" required>
+                        </textarea>
+                    </p>
+
+                    <input type="submit" value="submit">
+                </form>
+            </section>
+        </section>
+
+        <p>Instructions on how refs work</p>
+        <br>
+        <i>{{ message }}</i>
+    </main>
+{% endblock %}

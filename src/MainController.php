@@ -1,106 +1,100 @@
 <?php
 
-/*
- *
- *
- * answer not getting through from additionPage
- *
- *
- *
- */
-
 namespace Itb;
 
-require_once __DIR__ . "/../app/setup.php";
+use Itb\tag\TagRepository;
 
 class MainController
 {
-    public function indexAction(\Twig_Environment $twig)
+    private $loginController;
+
+    private $app;
+
+    public function __construct(WebApplication $app)
     {
+        $this->app = $app;
+        $this->loginController = new LoginController($app);
+    }
+
+    public function indexAction()
+    {
+        $isLoggedIn = $this->loginController->isLoggedInFromSession();
+        if($isLoggedIn) {
+            $collegeId = $this->loginController->collegeIdFromSession();
+        }
+        else{
+            $collegeId = 'guest';
+        }
+
         $template = 'index';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
+        $argsArray = [
+            'collegeId' => $collegeId
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }
 
-    public function additionIndexAction(\Twig_Environment $twig)
+    public function loginAction()
     {
-        $template = 'additionIndex';
-        $numArray = range(1,12);
-        $argsArray = ['numArray' => $numArray];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
+        $isLoggedIn = $this->loginController->isLoggedInFromSession();
 
-    /*public function additionTestAction()
-    {
-        $template = 'additionIndex';
-        $argsArray = [];
-        $addNum = filter_input(INPUT_GET, 'addNum', FILTER_SANITIZE_NUMBER_INT);
-        var_dump($addNum);
-        require_once __DIR__ . "../templates/additionTest.html";
-    }*/
-
-    public function subtractionAction(\Twig_Environment$twig)
-    {
-        $template = 'subtraction';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-    public function shopAction(\Twig_Environment $twig)
-    {
-        $template = 'shop';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-    public function clockAction(\Twig_Environment $twig)
-    {
-        $template = 'clock';
-        $argsArray = [];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }
-
-    /*public function additionPage_action(\Twig_Environment $twig)
-    {
-        $template = 'additionPage';
-        // below also in addition controller function
-        //$answer = filter_input(INPUT_GET, 'answer', FILTER_SANITIZE_STRING);
-        $addNum = filter_input(INPUT_GET, 'addNum', FILTER_SANITIZE_STRING);
-
-        $numArray = array();
-        $additionController = new \Itb\AdditionController($addNum);
-        //$answer = (int)$answer;
-        if (empty($answer)) {
-            //$additionController = new \Itb\AdditionController($addNum);
-            $numArray = $additionController->createAndShuffleArray();
-            var_dump('testAnswerIsEmpty');
+        if($isLoggedIn) {
+            $collegeId = $this->loginController->collegeIdFromSession();
         }
-        /*elseif(!empty($answer)){
-            var_dump('TestAnswer!Empty');
+        else{
+            $collegeId = 'guest';
         }
 
-        $arrayRandNumScore = $additionController->additionLayout($numArray);
-        //var_dump( "score&ranNumInMCAddPageAction =" . $arrayRandNumScore);
-
+        $template = 'loginForm';
         $argsArray = [
-
-            'addNum' => $addNum,
-            'arrayRandNumScore' => $arrayRandNumScore
+            'collegeId' => $collegeId
         ];
-        return $twig->render($template . '.html.twig', $argsArray);
-    }*/
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
 
-
-
-    public function nextAddQuestion(\Twig_Environment $twig, array $numArray, int $addNum)
+    public function registerAction()
     {
+        $isLoggedIn = $this->loginController->isLoggedInFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
 
-        $this->$addNum=$addNum;
-        $template = 'additionPage';
+        $message = '';
+        $template = 'admin/register';
+        $argsArray = [
+            'collegeId' => $collegeId,
+            'message' => $message
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+    public function proposeTagAction()
+    {
+        $isLoggedIn = $this->loginController->isLoggedInFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+
+        $message = '';
+        $template = 'proposeTag';
 
         $argsArray = [
-            'addNum' => $addNum,
+            'collegeId' => $collegeId,
+            'message' => $message,
+            'isLoggedIn' => $isLoggedIn
         ];
-        return $twig->render($template . '.html.twig', $argsArray);
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+    public function proposeRefAction()
+    {
+        $isLoggedIn = $this->loginController->isLoggedInFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+        $proposedTagRepository = new TagRepository();
+        $tags = $proposedTagRepository->getTags();
+        $message = '';
+        $template = 'proposeRef';
+        $argsArray = [
+            'tags' => $tags,
+            'collegeId' => $collegeId,
+            'message' => $message,
+            'isLoggedIn' => $isLoggedIn
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }
 }

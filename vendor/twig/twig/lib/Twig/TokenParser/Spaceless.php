@@ -10,7 +10,7 @@
  */
 
 /**
- * Remove whitespaces between HTML tags.
+ * Remove whitespaces between HTML tag.
  *
  * <pre>
  * {% spaceless %}

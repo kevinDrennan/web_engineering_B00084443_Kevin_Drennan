@@ -1,0 +1,37 @@
+{% extends 'admin/_adminBase.html.twig' %}
+{% block pageTitle %} Admin Page {% endblock %}
+{% block main %}
+    <main>
+        <br>
+        <form action="/updateUser/{{ user.id }}" method="post">
+            <table>
+                <tr>
+                    <th>College ID</th>
+                    <th>First name</th>
+                    <th>Surname</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                </tr>
+
+                <tr>
+                    <td><input type="text" value="{{ user.collegeId }}" name="collegeId"></td>
+                    <td><input type="text" value="{{ user.firstName}}" name="firstName"></td>
+                    <td><input type="text" value="{{ user.surname }}" name="surname"></td>
+                    <td><input type="text" value="{{ user.email }}" name="email"></td>
+                    <td>
+                        <select name="role" required>
+                            <option value = 1>Student</option>
+                            <option value = 2>Lecturer</option>
+                            <option value = 3>Admin</option>
+                        </select>
+                    </td>
+                </tr>
+
+            </table>
+            <br>
+            <input type="submit" value="Update">
+        </form>
+
+
+    </main>
+{% endblock %}

@@ -176,7 +176,7 @@ class Twig_Tests_Extension_SandboxTest extends PHPUnit_Framework_TestCase
     public function testSandboxAllowTag()
     {
         $twig = $this->getEnvironment(true, array(), self::$templates, array('if'));
-        $this->assertEquals('foo', $twig->loadTemplate('1_basic3')->render(self::$params), 'Sandbox allow some tags');
+        $this->assertEquals('foo', $twig->loadTemplate('1_basic3')->render(self::$params), 'Sandbox allow some tag');
     }
 
     public function testSandboxAllowProperty()
@@ -250,7 +250,6 @@ EOF
         try {
             $twig->loadTemplate('1_include')->render(self::$params);
         } catch (Throwable $e) {
-        } catch (Exception $e) {
         }
         if ($e === null) {
             $this->fail('An exception should be thrown for this test to be valid.');

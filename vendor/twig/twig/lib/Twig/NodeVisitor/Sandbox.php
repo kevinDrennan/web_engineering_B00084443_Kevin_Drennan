@@ -31,7 +31,7 @@ final class Twig_NodeVisitor_Sandbox extends Twig_BaseNodeVisitor
 
             return $node;
         } elseif ($this->inAModule) {
-            // look for tags
+            // look for tag
             if ($node->getNodeTag() && !isset($this->tags[$node->getNodeTag()])) {
                 $this->tags[$node->getNodeTag()] = $node;
             }

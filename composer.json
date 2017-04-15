@@ -5,6 +5,8 @@
     }
   },
   "require": {
-    "twig/twig": "^2.0"
+    "twig/twig": "^2.3",
+    "mattsmithdev/pdo-crud-for-free-repositories": "^0.8.0",
+    "silex/silex": "^2.0"
   }
 }

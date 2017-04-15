@@ -30,7 +30,7 @@ class Twig_Node_CheckSecurity extends Twig_Node
     public function compile(Twig_Compiler $compiler)
     {
         $tags = $filters = $functions = array();
-        foreach (array('tags', 'filters', 'functions') as $type) {
+        foreach (array('tag', 'filters', 'functions') as $type) {
             foreach ($this->{'used'.ucfirst($type)} as $name => $node) {
                 if ($node instanceof Twig_Node) {
                     ${$type}[$name] = $node->getTemplateLine();
@@ -41,7 +41,7 @@ class Twig_Node_CheckSecurity extends Twig_Node
         }
 
         $compiler
-            ->write('$tags = ')->repr(array_filter($tags))->raw(";\n")
+            ->write('$tag = ')->repr(array_filter($tags))->raw(";\n")
             ->write('$filters = ')->repr(array_filter($filters))->raw(";\n")
             ->write('$functions = ')->repr(array_filter($functions))->raw(";\n\n")
             ->write("try {\n")
@@ -57,9 +57,9 @@ class Twig_Node_CheckSecurity extends Twig_Node
             ->write("} catch (Twig_Sandbox_SecurityError \$e) {\n")
             ->indent()
             ->write("\$e->setSourceContext(\$this->getSourceContext());\n\n")
-            ->write("if (\$e instanceof Twig_Sandbox_SecurityNotAllowedTagError && isset(\$tags[\$e->getTagName()])) {\n")
+            ->write("if (\$e instanceof Twig_Sandbox_SecurityNotAllowedTagError && isset(\$tag[\$e->getTagName()])) {\n")
             ->indent()
-            ->write("\$e->setTemplateLine(\$tags[\$e->getTagName()]);\n")
+            ->write("\$e->setTemplateLine(\$tag[\$e->getTagName()]);\n")
             ->outdent()
             ->write("} elseif (\$e instanceof Twig_Sandbox_SecurityNotAllowedFilterError && isset(\$filters[\$e->getFilterName()])) {\n")
             ->indent()

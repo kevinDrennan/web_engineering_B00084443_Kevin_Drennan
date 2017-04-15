@@ -1,0 +1,23 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Login Page {% endblock %}
+
+
+{% block main %}
+<main>
+<form  action="/processLogin" method="post">
+
+    <p>
+        College No :
+        <input type="text" name="collegeId" autocomplete="off">
+    </p>
+
+    <p>
+        Password   :
+        <input type="password" name="password">
+    </p>
+
+    <input type="submit" value="login">
+
+</form>
+</main>
+{% endblock %}

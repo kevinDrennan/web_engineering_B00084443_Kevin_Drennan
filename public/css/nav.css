@@ -1,0 +1,87 @@
+nav ul {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    background-color: gainsboro;
+}
+
+nav ul li  {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+    align-content: center;
+}
+
+a:visited {
+    color: inherit;
+}
+
+main section a:hover {
+    cursor: pointer;
+}
+
+
+/*                 APPLIES TO BOTH NAVBARS                         */
+
+nav a {
+    display: block;
+    padding: 0.6rem;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    /*border-radius: 2rem;*/
+    border: 0.2rem solid black;
+    margin: 1rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
+    text-decoration: none;
+    text-align: center;
+    background-color: gainsboro;
+    font-variant: small-caps;
+}
+
+nav a:hover {
+    background-color: lightblue;
+    color: white;
+}
+
+nav a.current_page {
+    color: #cc3300;
+}
+
+.flexContainer {
+    display: flex;
+}
+
+.blockContainer {
+    display: block;
+    background-color:gainsboro;
+}
+
+.headingContainer {
+    display: block;
+    border-radius: 2rem;
+    text-decoration: none;
+    text-align: center;
+    background-color:gainsboro;
+    font-variant: small-caps;
+    height: 3rem;
+    font-size: 3rem;
+}
+
+.bigFlex {
+    flex: 4;
+}
+
+.smallFlex {
+    flex: 1;
+}
+
+/* to affect login logout blocks individually on home page */
+
+.smallFlex a {
+    margin-top: .5em;
+    margin-bottom: .5em;
+}

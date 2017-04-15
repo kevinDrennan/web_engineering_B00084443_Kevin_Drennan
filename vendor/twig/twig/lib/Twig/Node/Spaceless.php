@@ -12,7 +12,7 @@
 /**
  * Represents a spaceless node.
  *
- * It removes spaces between HTML tags.
+ * It removes spaces between HTML tag.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */

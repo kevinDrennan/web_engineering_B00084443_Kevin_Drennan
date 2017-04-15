@@ -1,0 +1,19 @@
+{% extends 'admin/_adminBase.html.twig' %}
+{% block pageTitle %} Admin Page {% endblock %}
+{% block main %}
+    <main>
+
+        <p>Choose person by their College Id</p>
+        <br>
+        <form action="/adminViewAction" method="post">
+            <input type="text" name="collegeId" autocomplete="off">
+
+            <input type="submit" value="find">
+        </form>
+        <br>
+        <h3><i>{{ message }}</i></h3>
+
+    </main>
+
+
+{% endblock %}

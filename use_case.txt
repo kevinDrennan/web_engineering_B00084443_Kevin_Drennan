@@ -7,15 +7,15 @@ HOME SCREEN
     1e. User may choose clock test.
 
 LOGIN
-  1. User enters username.
+  1. User enters collegeId.
   2. User enters password.
   3. User is logged in.
-    3a. User informed incorrect username or password, returned to empty login screen.
+    3a. User informed incorrect collegeId or password, returned to empty login screen.
     
 SIGN UP
-  1. User enters username.
+  1. User enters collegeId.
   2. User enters password. 
-    2a. User enters non unique username and is returned to sign up screen.
+    2a. User enters non unique collegeId and is returned to sign up screen.
 
 ADDITION
   1. User chooses number x (number between 1 and 12)
