@@ -1,0 +1,45 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Home Page {% endblock %}
+
+
+{% block main %}
+<main>
+     <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Summary</th>
+            <th>Year</th>
+            <th>Publisher</th>
+            <th>Place of publication</th>
+            <th>Creator Id</th>
+        </tr>
+
+        <tr>
+            <td>{{ ref.title}}</td>
+            <td>{{ ref.author }}</td>
+            <td>{{ ref.summary }}</td>
+            <td>{{ ref.year }}</td>
+            <td>{{ ref.publisher }}</td>
+            <td>{{ ref.placeofpublication }}</td>
+            <td>{{ ref.creatorid }}</td>
+        </tr>
+     </table>
+    <br>
+    <table>
+        <tr>
+            {% for tag in tagsForRef %}
+                <th>Tag Name</th>
+                <th>Tag Description</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for tag in tagsForRef %}
+                <td>{{ tag.tagName }}</td>
+                <td>{{ tag.tagDescription }}</td>
+            {% endfor %}
+        </tr>
+    </table>
+
+</main>
+{% endblock %}

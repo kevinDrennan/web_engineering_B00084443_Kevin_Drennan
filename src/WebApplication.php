@@ -47,6 +47,7 @@ class WebApplication extends Application
             function() {return new AdminController($this);  };
 
         $this->get('/', 'main.controller:indexAction');
+        $this->get('/studentLecturerIndex', 'main.controller:studentLecturerIndexAction');
         $this->get('/login', 'main.controller:loginAction');
         $this->get('/register', 'main.controller:registerAction');
         $this->get('/proposeTag', 'main.controller:proposeTagAction');
@@ -59,6 +60,11 @@ class WebApplication extends Application
         $this->get('/upVoteTag/{id}', 'tag.controller:upVoteTagAction');
         $this->get('/downVoteTag/{id}', 'tag.controller:downVoteTagAction');
         $this->post('/processProposedRef', 'ref.controller:processProposedRefAction');
+        $this->get('/viewRefs', 'ref.controller:viewRefs');
+        $this->get('/viewRefDetails/{id}', 'ref.controller:viewRefDetails');
+        $this->post('/searchRefsByTags', 'ref.controller:searchRefsByTags');
+        $this->post('/searchRefsByFreeText', 'ref.controller:searchRefsByFreeText');
+        //$this->post('/viewPersonalRefs', 'ref.controller:viewPersonalRefs');
         $this->post('/adminViewAction', 'admin.controller:adminViewAction');
         $this->get('/returnToAdminHome', 'admin.controller:returnToAdminHome');
         $this->get('/deleteUser/{id}', 'admin.controller:deleteUser');

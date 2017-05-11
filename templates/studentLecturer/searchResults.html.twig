@@ -1,0 +1,56 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Home Page {% endblock %}
+
+
+{% block main %}
+    <main>
+        <h1>Search Refs, search by tag or freetext</h1>
+        <h3>Tags, max three tags can be used in search</h3>
+        <form  action="/searchRefsByTags" method="post">
+            <div style="height: 4em; width: 12em; overflow: auto;">
+                {% for tag in tags %}
+                    <input type="checkbox" name="tags[]" value={{ tag.id }}>
+                    <label>{{ tag.tagName }}</label>
+                    <br>
+                {% endfor %}
+            </div>
+            <br>
+            <input type="submit" value="search">
+        </form>
+        <br>
+
+        <h3>Free Text</h3>
+
+        <form  action="/searchRefsByFreeText" method="post">
+            <p>
+                Text for search :
+                <input type="text" name="freeText" autocomplete="off">
+            </p>
+            <input type="submit" value="search">
+        </form>
+        <br>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Summary</th>
+                <th>Year</th>
+            </tr>
+
+            {% for ref in allRefs %}
+
+                <tr>
+                    <td>{{ ref.title}}</td>
+                    <td>{{ ref.author }}</td>
+                    <td>{{ ref.summary }}</td>
+                    <td>{{ ref.year }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+        <h2><i>{{ message }}</i></h2>
+    </main>
+
+
+{% endblock %}

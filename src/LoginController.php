@@ -16,7 +16,6 @@ class LoginController
 
     public function logoutAction()
     {
-        // remove 'user' element from SESSION array
         unset($_SESSION['collegeId']);
 
         $isLoggedIn = $this->isLoggedInFromSession();
@@ -38,27 +37,31 @@ class LoginController
     public function processLoginAction()
     {
         $isLoggedIn = false;
+        $message = '';
         $collegeId = filter_input(INPUT_POST, 'collegeId', FILTER_SANITIZE_STRING);
         $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
         // search for user with collegeId in repository
         $isLoggedIn = User::canFindMatchingCollegeIdAndPassword($collegeId, $password);
         $user = UserRepository::getOneByCollegeId($collegeId);
-        $role = $user->role;
+        if(isset($user)){
+            $role = $user->role;
+        }
 
         if ($isLoggedIn == false) {
-            $errorMessage = 'bad username or password, please try again';
-            $template = 'message';
+            $message = 'bad username or password, please try again';
+            $template = 'loginForm';
+            $collegeId = 'guest';
             $argsArray = [
-                'errorMessage' => $errorMessage
+                'collegeId' => $collegeId,
+                'message' => $message
             ];
             return $this->app['twig']->render($template . '.html.twig', $argsArray);
         }
-
+        $_SESSION['role'] = $role;
         $_SESSION['collegeId'] = $collegeId;
 
         if ($role == 3 && $isLoggedIn == true) {
             $template = 'admin/adminIndex';
-            $message = '';
             $argsArray = [
                 'collegeId' => $collegeId,
                 'message' => $message
@@ -66,7 +69,7 @@ class LoginController
             return $this->app['twig']->render($template . '.html.twig', $argsArray);
         }
 
-        $template = 'index';
+        $template = 'studentLecturer/studentLecturerIndex';
         $argsArray = [
             'collegeId' => $collegeId,
             'role' => $role
@@ -74,8 +77,7 @@ class LoginController
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }
 
-    public
-    function isLoggedInFromSession()
+    public function isLoggedInFromSession()
     {
         $isLoggedIn = false;
 
@@ -86,8 +88,7 @@ class LoginController
         return $isLoggedIn;
     }
 
-    public
-    function collegeIdFromSession()
+    public function collegeIdFromSession()
     {
         $collegeId = 'Guest';
 
@@ -96,6 +97,16 @@ class LoginController
         }
 
         return $collegeId;
+    }
+
+    public function roleFromSession()
+    {
+        $role = 0;
+
+        if (isset($_SESSION['role']))  {
+            $role = $_SESSION['role'];
+        }
+        return $role;
     }
 
 

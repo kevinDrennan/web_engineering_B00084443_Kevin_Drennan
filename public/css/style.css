@@ -18,3 +18,12 @@ i {
 .inlineBlock {
     display: inline-block;
 }
+
+.flex1 {
+    flex: 1;
+}
+
+.flexContainer {
+    display: flex;
+    text-align: center;
+}

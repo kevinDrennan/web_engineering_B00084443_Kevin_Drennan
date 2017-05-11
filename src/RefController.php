@@ -8,11 +8,14 @@ use Itb\tag\TagRepository;
 class RefController
 {
     private $app;
+    private $loginController;
+    private $tagRepository;
 
     public function __construct(WebApplication $app)
     {
         $this->app = $app;
         $this->loginController = new LoginController($app);
+        $this->tagRepository = new TagRepository();
     }
 
     public function processProposedRefAction()
@@ -25,6 +28,7 @@ class RefController
         $refSummary = filter_input(INPUT_POST, 'refSummary', FILTER_SANITIZE_STRING);
         $chosenTags = filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);//from book
 
+        $role = $this->loginController->roleFromSession();
         $collegeId = $this->loginController->collegeIdFromSession();
         $isLoggedIn = $this->loginController->isLoggedInFromSession();
 
@@ -60,10 +64,156 @@ class RefController
 
         $template = 'proposeRef';
         $argsArray = [
+            'role' => $role,
             'tags' => $tags,
             'collegeId' => $collegeId,
             'message' => $message,
             'isLoggedIn' => $isLoggedIn
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+
+
+    public function viewRefs()
+    {
+        $role = $this->loginController->roleFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+        $refRepository = new RefRepository();
+        $allRefs = $refRepository->getAll();
+        $tagRepository = new TagRepository();
+        $tags = $tagRepository->getTags();
+
+        $template = 'studentLecturer/viewRefs';
+        $argsArray = [
+            'role' => $role,
+            'tags' => $tags,
+            'allRefs' => $allRefs,
+            'collegeId' => $collegeId
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+    public function viewRefDetails($id)
+    {
+        $role = $this->loginController->roleFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+        $refRepository = new RefRepository();
+        $ref = $refRepository->getOneById($id);
+        $tagsForRef = $refRepository->getTagsForRef($id);
+        var_dump('inViewDetails');
+        var_dump($tagsForRef);
+
+        $template = 'studentLecturer/refDetails';
+        $argsArray = [
+            'tagsForRef' => $tagsForRef,
+            'role' => $role,
+            'ref' => $ref,
+            'collegeId' => $collegeId
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+    public function viewPersonalRefs()
+    {
+
+    }
+
+    public function searchRefsByTags()
+    {
+        $message ='';
+        $role = $this->loginController->roleFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+        $referenceIds = $this->getRefsIdFromDatabase();
+        $tagRepository = new TagRepository();
+        $tags = $tagRepository->getTags();
+        /*
+         * if no tags were chosen
+         */
+        if($referenceIds == 0){
+            $message = 'no tags were chosen';
+            $template = 'studentLecturer/searchResults';
+            $refArray = null;
+            $argsArray = [
+                'message' => $message,
+                'role' => $role,
+                'allRefs' => $refArray,
+                'tags' => $tags,
+                'collegeId' => $collegeId
+            ];
+            return $this->app['twig']->render($template . '.html.twig', $argsArray);
+        }
+
+        /*
+         * get ref details from ids in $referenceIds
+         */
+        $refArray = array();
+        $refArray = $this->getRefsDetailsFromIds($referenceIds);
+
+        $template = 'studentLecturer/searchResults';
+        $argsArray = [
+            'message' => $message,
+            'role' => $role,
+            'allRefs' => $refArray,
+            'tags' => $tags,
+            'collegeId' => $collegeId
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+    public function getRefsIdFromDatabase()
+    {
+        $chosenTags = filter_input(INPUT_POST, 'tags', FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+        if(!isset($chosenTags)){
+            return 0;
+        }
+        $referenceId = array();
+
+        if(count($chosenTags) == 1){
+            $referenceId = RefRepository::searchBySingleTag($chosenTags);
+        }
+        elseif(count($chosenTags) == 2){
+            $referenceId = RefRepository::searchByTwoTags($chosenTags);
+        }
+        elseIf(count($chosenTags) == 3){
+            $referenceId = RefRepository::searchByThreeTags($chosenTags);
+        }
+        else{
+            $referenceId = 0;
+        }
+
+        return $referenceId;
+    }
+
+    public function getRefsDetailsFromIds($referenceIds)
+    {
+        $refRepository = new RefRepository();
+        $refArray = array();
+        foreach($referenceIds as $key=>$id){
+            $refArray[$key] = $refRepository->getOneById($id);
+        }
+        return $refArray;
+    }
+
+    public function searchRefsByFreeText()
+    {
+        $message ='';
+        $role = $this->loginController->roleFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+        $tagRepository = new TagRepository();
+        $tags = $tagRepository->getTags();
+        $freeText = filter_input(INPUT_POST, 'freeText', FILTER_SANITIZE_STRING);
+        $refRepository = new RefRepository();
+        $columnName = 'summary';
+        $ref = $refRepository->searchByColumn($columnName, $freeText);
+
+        $template = 'studentLecturer/searchResults';
+        $argsArray = [
+            'message' => $message,
+            'role' => $role,
+            'allRefs' => $ref,
+            'tags' => $tags,
+            'collegeId' => $collegeId
         ];
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }

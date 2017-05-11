@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="MySQL - bibliography_manager@localhost" uuid="0c1715f7-e256-4659-a922-d4e521e63455">
+    <data-source name="MySQL - bibliography_manager@localhost" uuid="d65cacb5-1efd-41a9-818b-c6b246f8e013">
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
       <schema-pattern>bibliography_manager.*</schema-pattern>

@@ -1,0 +1,63 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Home Page {% endblock %}
+
+
+{% block main %}
+    <main>
+        <h2>Search refs by tags or freetext</h2>
+        <section class="flexContainer">
+            <section class="flex1">
+                <h3>Tags</h3>
+                <form  action="/searchRefsByTags" method="post">
+                    <div style="height: 4em; width: 12em; overflow: auto;">
+                            {% for tag in tags %}
+                                <input type="checkbox" name="tags[]" value={{ tag.id }}>
+                                <label>{{ tag.tagName }}</label>
+                                <br>
+                            {% endfor %}
+                    </div>
+                    <br>
+                    <input type="submit" value="search">
+                </form>
+            </section>
+
+            <section class="flex1">
+                <h3>Free Text</h3>
+
+                <form  action="/searchRefsByFreeText" method="post">
+                    <p>
+                        Text for search :
+                        <input type="text" name="freeText" autocomplete="off">
+                    </p>
+                    <input type="submit" value="search">
+                </form>
+                <br>
+            </section>
+        </section>
+        <br>
+
+        <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Summary</th>
+                <th>Year</th>
+                <th></th>
+            </tr>
+
+            {% for ref in allRefs %}
+
+                <tr>
+                    <td>{{ ref.title}}</td>
+                    <td>{{ ref.author }}</td>
+                    <td>{{ ref.summary }}</td>
+                    <td>{{ ref.year }}</td>
+                    <td><a href="/viewRefDetails/{{ ref.id }}">view details</a></td>
+                </tr>
+            {% endfor %}
+
+        </table>
+    </main>
+
+
+{% endblock %}

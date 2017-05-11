@@ -1,5 +1,23 @@
 # web_engineering_B00084443_Kevin_Drennan
 
+
+SELECT M1.refId
+FROM reftags M1, reftags M2
+WHERE M1.refId = M2.refId
+AND M1.tagId = 6 
+AND M2.tagId = 9;
+https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=9&cad=rja&uact=8&ved=0ahUKEwiY1O3o9OXTAhXHI8AKHYr6BaEQFghZMAg&url=https%3A%2F%2Focw.mit.edu%2Fcourses%2Furban-studies-and-planning%2F11-521-spatial-database-management-and-advanced-geographic-information-systems-spring-2003%2Flecture-notes%2Flect4.pdf&usg=AFQjCNG1bFgSkyEF8UuMCyI4RGPboHZXGg
+
+http://stackoverflow.com/questions/27371880/php-pdo-found-rows-returns-0/29924433#29924433
+for fetching columns
+
+div in search results and createref and viewrefs div into css
+Login
+error if login as student/student
+limit to three checkboxes on search refs
+
+home to return to studentlecturerIndex page when logged in
+
 TAGS
 message when logged out
 in alphabetical order in create ref page
@@ -7,6 +25,11 @@ ensure new tags are unique, do not match previous proposed tag or current tag
 tag less than 15 characters
 create tag database
 add tags when creating ref
+
+Lecturer
+publish bib to be public
+accept tag to be public 
+accept ref to be public
 
 ADMIN
 in admin view space between table and _base
@@ -73,4 +96,4 @@ public user
     -can publish a BIBS to be public, with a text title and text summary.               
 
 http://stackoverflow.com/questions/1869091/how-to-convert-an-array-to-object-in-php
-array to object in proposedtagrepository
+array to object in proposedtagrepository"# web_engineering_B00084443_Kevin_Drennan"  git init git add README.md git commit -m "first commit" git remote add origin https://github.com/kevinDrennan/web_engineering_B00084443_Kevin_Drennan.git git push -u origin master

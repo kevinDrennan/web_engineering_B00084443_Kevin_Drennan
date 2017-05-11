@@ -43,6 +43,9 @@ class TagController
 
     public function viewProposedTagsAction()
     {
+        /*
+         * $array returns index 0 = template, index 1 = tag objects
+         */
         $array = $this->getVariablesForViewProposedTags();
         $template = $array[0];
         $argsArray = $array[1];

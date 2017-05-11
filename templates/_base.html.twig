@@ -28,10 +28,15 @@
     <section class="blockContainer">
         <nav>
             <ul>
+                {% if role == 1 or role == 2 %}
+                <li>
+                    <a href="/studentLecturerIndex">Home</a>
+                </li>
+                {% else %}
                 <li>
                     <a href="/">Home</a>
                 </li>
-
+                {% endif %}
                 <li>
                     <a href="/about">About</a>
                 </li>

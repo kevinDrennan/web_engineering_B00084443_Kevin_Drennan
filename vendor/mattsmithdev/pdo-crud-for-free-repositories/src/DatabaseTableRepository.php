@@ -113,11 +113,10 @@ class DatabaseTableRepository
     {
         $db = new DatabaseManager();
         $connection = $db->getDbh();
-
         // wrap wildcard '%' around the serach text for the SQL query
         $searchText = '%' . $searchText . '%';
 
-        $statement = $connection->prepare('SELECT * from dvds WHERE ' . $columnName . ' LIKE :searchText');
+        $statement = $connection->prepare('SELECT * from ' . $this->tableName . ' WHERE ' . $columnName . ' LIKE :searchText');
         $statement->bindParam(':searchText', $searchText, \PDO::PARAM_STR);
         $statement->setFetchMode(\PDO::FETCH_CLASS, $this->classNameForDbRecords);
         $statement->execute();

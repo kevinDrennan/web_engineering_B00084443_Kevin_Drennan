@@ -18,6 +18,7 @@ class MainController
 
     public function indexAction()
     {
+        $role = $this->loginController->roleFromSession();
         $isLoggedIn = $this->loginController->isLoggedInFromSession();
         if($isLoggedIn) {
             $collegeId = $this->loginController->collegeIdFromSession();
@@ -28,7 +29,23 @@ class MainController
 
         $template = 'index';
         $argsArray = [
-            'collegeId' => $collegeId
+            'collegeId' => $collegeId,
+            'role' => $role,
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+    public function studentLecturerIndexAction()
+    {
+        $role = $this->loginController->roleFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+
+        $message = '';
+        $template = 'studentLecturer/studentLecturerIndex';
+        $argsArray = [
+            'collegeId' => $collegeId,
+            'message' => $message,
+            'role' => $role
         ];
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }
@@ -36,6 +53,7 @@ class MainController
     public function loginAction()
     {
         $isLoggedIn = $this->loginController->isLoggedInFromSession();
+        $role = $this->loginController->roleFromSession();
 
         if($isLoggedIn) {
             $collegeId = $this->loginController->collegeIdFromSession();
@@ -44,21 +62,26 @@ class MainController
             $collegeId = 'guest';
         }
 
+        $message = '';
         $template = 'loginForm';
         $argsArray = [
-            'collegeId' => $collegeId
+            'collegeId' => $collegeId,
+            'message' => $message,
+            'role' => $role
         ];
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }
 
     public function registerAction()
     {
+        $role = $this->loginController->roleFromSession();
         $isLoggedIn = $this->loginController->isLoggedInFromSession();
         $collegeId = $this->loginController->collegeIdFromSession();
 
         $message = '';
         $template = 'admin/register';
         $argsArray = [
+            'role' => $role,
             'collegeId' => $collegeId,
             'message' => $message
         ];
@@ -67,6 +90,7 @@ class MainController
 
     public function proposeTagAction()
     {
+        $role = $this->loginController->roleFromSession();
         $isLoggedIn = $this->loginController->isLoggedInFromSession();
         $collegeId = $this->loginController->collegeIdFromSession();
 
@@ -83,6 +107,7 @@ class MainController
 
     public function proposeRefAction()
     {
+        $role = $this->loginController->roleFromSession();
         $isLoggedIn = $this->loginController->isLoggedInFromSession();
         $collegeId = $this->loginController->collegeIdFromSession();
         $proposedTagRepository = new TagRepository();
@@ -90,6 +115,7 @@ class MainController
         $message = '';
         $template = 'proposeRef';
         $argsArray = [
+            'role' => $role,
             'tags' => $tags,
             'collegeId' => $collegeId,
             'message' => $message,

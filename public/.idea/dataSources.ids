@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
-  <data-source name="MySQL - bibliography_manager@localhost" uuid="0c1715f7-e256-4659-a922-d4e521e63455">
+  <data-source name="MySQL - bibliography_manager@localhost" uuid="d65cacb5-1efd-41a9-818b-c6b246f8e013">
     <database-info product="MySQL" version="5.5.5-10.1.9-MariaDB-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
       <extra-name-characters>#@</extra-name-characters>
       <identifier-quote-string>`</identifier-quote-string>
@@ -16,13 +16,12 @@
       <column name="placeofpublication" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
       <column name="summary" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
       <column name="creatorid" sqlType="VARCHAR" precision="11" scale="0" nullable="false" jdbcType="12"/>
-      <column name="accepted" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="reftags" schema="" catalog="bibliography_manager" type="TABLE">
-      <column name="refId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="tagId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <primary-key name="PRIMARY" columns="tagId,refId"/>
+      <column name="refid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="tagid" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="tagid,refid"/>
     </table>
     <table name="tags" schema="" catalog="bibliography_manager" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
