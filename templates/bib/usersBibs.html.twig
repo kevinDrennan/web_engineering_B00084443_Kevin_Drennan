@@ -1,0 +1,30 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Update Bib {% endblock %}
+
+
+{% block main %}
+    <main>
+        <h3>{{ collegeId }} Bibs</h3>
+
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Add to this Bib</th>
+            </tr>
+
+            {% for bib in usersBibs %}
+
+                <tr>
+                    <td>{{ bib.id }}</td>
+                    <td>{{ bib.title}}</td>
+                    <td>{{ bib.summary }}</td>
+                    <td><a href="/addRefToBib/{{ bib.id }}/{{ refId }}">Add</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+        {{ message }}
+    </main>
+
+{% endblock %}

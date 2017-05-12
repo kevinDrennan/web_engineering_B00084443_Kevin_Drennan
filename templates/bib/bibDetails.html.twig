@@ -1,0 +1,43 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Home Page {% endblock %}
+
+
+{% block main %}
+    <main>
+        <br>
+        <a class="button" href="/viewBibs">-- Return to list of Bibs --</a>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Creator Id</th>
+            </tr>
+
+            <tr>
+                <td>{{ bib.id }}</td>
+                <td>{{ bib.title }}</td>
+                <td>{{ bib.summary }}</td>
+                <td>{{ bib.creatorId }}</td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <tr>
+                {% for ref in refsForBib %}
+                    <th>Ref Title</th>
+                    <th>Ref Summary</th>
+                {% endfor %}
+            </tr>
+            <tr>
+                {% for ref in refsForBib %}
+                    <td>{{ ref.title }}</td>
+                    <td>{{ ref.summary }}</td>
+                {% endfor %}
+            </tr>
+        </table>
+
+    </main>
+{% endblock %}

@@ -17,7 +17,9 @@ class LoginController
     public function logoutAction()
     {
         unset($_SESSION['collegeId']);
-
+        unset($_SESSION['role']);
+        session_destroy();
+        $role = 0;
         $isLoggedIn = $this->isLoggedInFromSession();
 
         if($isLoggedIn) {
@@ -29,6 +31,7 @@ class LoginController
         }
         $template = 'index';
         $argsArray = [
+            'role'=>$role,
             'collegeId' => $collegeId
         ];
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
@@ -46,12 +49,17 @@ class LoginController
         if(isset($user)){
             $role = $user->role;
         }
+        else{
+            $role = 0;
+        }
 
         if ($isLoggedIn == false) {
             $message = 'bad username or password, please try again';
             $template = 'loginForm';
             $collegeId = 'guest';
+            $role = 0;
             $argsArray = [
+                'role' => $role,
                 'collegeId' => $collegeId,
                 'message' => $message
             ];
@@ -63,6 +71,7 @@ class LoginController
         if ($role == 3 && $isLoggedIn == true) {
             $template = 'admin/adminIndex';
             $argsArray = [
+                'role' => $role,
                 'collegeId' => $collegeId,
                 'message' => $message
             ];

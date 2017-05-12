@@ -70,7 +70,6 @@ class refRepository extends DatabaseTableRepository
         $statement->setFetchMode(\PDO::FETCH_CLASS, __CLASS__);
         $statement->execute();
         $refId = $statement->fetchAll(\PDO::FETCH_COLUMN);
-        var_dump('hi');
         return $refId;
     }
 
@@ -123,8 +122,6 @@ class refRepository extends DatabaseTableRepository
         $db = new DatabaseManager();
         $connection = $db->getDbh();
         $tagRepository = new TagRepository();
-        var_dump('id');
-        var_dump($id);
 
         $sql = 'SELECT tagId FROM reftags WHERE refId = :id';
         $statement = $connection->prepare($sql);
@@ -132,8 +129,6 @@ class refRepository extends DatabaseTableRepository
         $statement->setFetchMode(\PDO::FETCH_CLASS, __CLASS__);
         $statement->execute();
         $tagIDs = $statement->fetchAll(\PDO::FETCH_COLUMN);
-        var_dump('tagIds');
-        var_dump($tagIDs);
 
         $tagArray = array();
         foreach($tagIDs as $key => $id){

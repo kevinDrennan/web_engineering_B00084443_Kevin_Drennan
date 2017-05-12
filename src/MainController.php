@@ -3,6 +3,7 @@
 namespace Itb;
 
 use Itb\tag\TagRepository;
+use Itb\ref\RefRepository;
 
 class MainController
 {
@@ -98,6 +99,7 @@ class MainController
         $template = 'proposeTag';
 
         $argsArray = [
+            'role' => $role,
             'collegeId' => $collegeId,
             'message' => $message,
             'isLoggedIn' => $isLoggedIn
@@ -120,6 +122,45 @@ class MainController
             'collegeId' => $collegeId,
             'message' => $message,
             'isLoggedIn' => $isLoggedIn
+        ];
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
+    }
+
+    public function viewPersonDetails($id)
+    {
+        if($id == 0){
+            $message = 'user was not logged in when creating ref';
+            $role = $this->loginController->roleFromSession();
+            $collegeId = $this->loginController->collegeIdFromSession();
+            $refRepository = new RefRepository();
+            $allRefs = $refRepository->getAll();
+            foreach($allRefs as $ref){
+                if($ref->creatorid == '0'){
+                    $ref->creatorid = 'publicly added';
+                }
+            }
+            $tagRepository = new TagRepository();
+            $tags = $tagRepository->getTags();
+
+            $template = 'studentLecturer/viewRefs';
+            $argsArray = [
+                'message' => $message,
+                'role' => $role,
+                'tags' => $tags,
+                'allRefs' => $allRefs,
+                'collegeId' => $collegeId
+            ];
+            return $this->app['twig']->render($template . '.html.twig', $argsArray);
+        }
+        $userRepository = new UserRepository();
+        $user = $userRepository->getOneByCollegeId($id);
+        $role = $this->loginController->roleFromSession();
+        $collegeId = $this->loginController->collegeIdFromSession();
+        $template = 'personDetails';
+        $argsArray = [
+            'role' => $role,
+            'user' => $user,
+            'collegeId' => $collegeId,
         ];
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }

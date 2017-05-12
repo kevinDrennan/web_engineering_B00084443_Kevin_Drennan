@@ -1,0 +1,30 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Creators Details {% endblock %}
+
+
+{% block main %}
+    <main>
+        <br>
+        <a class="button" href="/viewRefs">-- Return to list of Refs --</a>
+        <br>
+        <br>
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Surname</th>
+                <th>College Id</th>
+                <th>Email</th>
+                <th>Status</th>
+            </tr>
+
+            <tr>
+                <td>{{ user.firstName}}</td>
+                <td>{{ user.surname }}</td>
+                <td>{{ user.collegeId }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.role }}</td>
+            </tr>
+        </table>
+
+    </main>
+{% endblock %}

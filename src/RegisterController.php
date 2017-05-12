@@ -17,6 +17,7 @@ class RegisterController
 
     public function registerUserAction()
     {
+        $role = $this->loginController->roleFromSession();
         $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING);
         $surname = filter_input(INPUT_POST, 'surname', FILTER_SANITIZE_STRING);
         $collegeId = filter_input(INPUT_POST, 'collegeId', FILTER_SANITIZE_STRING);

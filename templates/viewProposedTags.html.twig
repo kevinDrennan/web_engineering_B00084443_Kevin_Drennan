@@ -12,17 +12,24 @@
                 <th>Votes</th>
                 <th>Up</th>
                 <th>Down</th>
+                {% if role == 2 %}
+                    <th>Publish</th>
+                {% endif %}
             </tr>
 
             {% for tag in proposedTags %}
-
-                <tr>
-                    <td>{{ tag.tagName }}</td>
-                    <td>{{ tag.tagDescription}}</td>
-                    <td>{{ tag.voteCount }}</td>
-                    <td><a href="/upVoteTag/{{ tag.id }}"><img src="/images/green_up_arrow.png"></a></td>
-                    <td><a href="/downVoteTag/{{ tag.id }}"><img src="/images/red_down_arrow.png"></a></td>
-                </tr>
+                {% if tag.accepted == 0 %}
+                    <tr>
+                        <td>{{ tag.tagName }}</td>
+                        <td>{{ tag.tagDescription}}</td>
+                        <td>{{ tag.voteCount }}</td>
+                        <td><a href="/upVoteTag/{{ tag.id }}"><img src="/images/green_up_arrow.png"></a></td>
+                        <td><a href="/downVoteTag/{{ tag.id }}"><img src="/images/red_down_arrow.png"></a></td>
+                        {% if role == 2 %}
+                            <td><a href="/publishTag/{{ tag.id }}">Publish Tag</a></td>
+                        {% endif %}
+                    </tr>
+                {% endif %}
             {% endfor %}
 
         </table>

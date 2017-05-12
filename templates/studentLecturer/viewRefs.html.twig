@@ -4,12 +4,13 @@
 
 {% block main %}
     <main>
+        <h3><i>{{ message }}</i></h3>
         <h2>Search refs by tags or freetext</h2>
         <section class="flexContainer">
             <section class="flex1">
-                <h3>Tags</h3>
+                <h3>Tags - Max of Three Tags per Search</h3>
                 <form  action="/searchRefsByTags" method="post">
-                    <div style="height: 4em; width: 12em; overflow: auto;">
+                    <div class="checkboxlist">
                             {% for tag in tags %}
                                 <input type="checkbox" name="tags[]" value={{ tag.id }}>
                                 <label>{{ tag.tagName }}</label>
@@ -33,6 +34,12 @@
                 </form>
                 <br>
             </section>
+
+            <section class="flex1">
+                <section class="button">
+                    <h3><a href="/viewRefs">View all refs</a></h3>
+                </section>
+            </section>
         </section>
         <br>
 
@@ -42,6 +49,8 @@
                 <th>Author</th>
                 <th>Summary</th>
                 <th>Year</th>
+                <th>Creator Id</th>
+                <th></th>
                 <th></th>
             </tr>
 
@@ -52,12 +61,12 @@
                     <td>{{ ref.author }}</td>
                     <td>{{ ref.summary }}</td>
                     <td>{{ ref.year }}</td>
+                    <td><a href="/viewPersonDetails/{{ ref.creatorid }}">{{ ref.creatorid }}</a></td>
                     <td><a href="/viewRefDetails/{{ ref.id }}">view details</a></td>
+                    <td><a href="/showUsersBibs/{{ ref.id }}">Add to Bib</a></td>
                 </tr>
             {% endfor %}
-
         </table>
     </main>
-
 
 {% endblock %}

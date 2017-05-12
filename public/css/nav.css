@@ -3,7 +3,7 @@ nav ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
-    background-color: darkolivegreen;
+    background-color: palegoldenrod;
 }
 
 nav ul li  {
@@ -31,19 +31,18 @@ nav a {
     padding: 0.6rem;
     padding-right: 2rem;
     padding-left: 2rem;
-    /*border-radius: 2rem;*/
     border: 0.2rem solid black;
     margin: 1rem;
     margin-left: 3rem;
     margin-right: 3rem;
     text-decoration: none;
     text-align: center;
-    background-color: gainsboro;
+    background-color: lightgoldenrodyellow;
     font-variant: small-caps;
 }
 
 nav a:hover {
-    background-color: lightblue;
+    background-color: lightslategray;
     color: white;
 }
 
@@ -62,13 +61,15 @@ nav a.current_page {
 
 .headingContainer {
     display: block;
-    border-radius: 2rem;
     text-decoration: none;
     text-align: center;
-    background-color:gainsboro;
+    background-color:palegoldenrod;
     font-variant: small-caps;
-    height: 3rem;
     font-size: 3rem;
+    margin-top: 0rem;
+    padding-bottom: 20px;
+    border-bottom-width: 10px;
+    margin-bottom: 0rem;
 }
 
 .bigFlex {

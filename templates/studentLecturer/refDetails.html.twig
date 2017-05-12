@@ -4,6 +4,10 @@
 
 {% block main %}
 <main>
+    <br>
+    <a class="button" href="/viewRefs">-- Return to list of Refs --</a>
+    <h2>Ref details</h2>
+    <br>
      <table>
         <tr>
             <th>Title</th>
@@ -26,6 +30,7 @@
         </tr>
      </table>
     <br>
+    <h2>Tags associated with the ref</h2>
     <table>
         <tr>
             {% for tag in tagsForRef %}
@@ -40,6 +45,21 @@
             {% endfor %}
         </tr>
     </table>
-
+    <br>
+    <h2>Bibs that the ref is referenced in</h2>
+    <table>
+        <tr>
+            {% for bib in bibForRef %}
+                <th>Bib Title</th>
+                <th>Tag Summary</th>
+            {% endfor %}
+        </tr>
+        <tr>
+            {% for bib in bibForRef %}
+                <td>{{ bib.title }}</td>
+                <td>{{ bib.summary }}</td>
+            {% endfor %}
+        </tr>
+    </table>
 </main>
 {% endblock %}

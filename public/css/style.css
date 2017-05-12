@@ -15,6 +15,16 @@ i {
     color: #dd4444;
 }
 
+a:hover {
+    background-color: lightslategray;
+    color: white;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
 .inlineBlock {
     display: inline-block;
 }
@@ -26,4 +36,16 @@ i {
 .flexContainer {
     display: flex;
     text-align: center;
+}
+
+.button {
+    border-style: outset;
+    display: inline-block;
+    text-align: center;
+}
+
+.checkboxlist {
+    height: 4em;
+    width: 12em;
+    overflow: auto;
 }

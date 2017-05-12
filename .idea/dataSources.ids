@@ -7,6 +7,19 @@
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
     <schema name="" catalog="bibliography_manager"/>
+    <table name="bibrefs" schema="" catalog="bibliography_manager" type="TABLE">
+      <column name="bibId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="refId" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="bibId,refId"/>
+    </table>
+    <table name="bibs" schema="" catalog="bibliography_manager" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="title" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="summary" sqlType="VARCHAR" precision="300" scale="0" nullable="false" jdbcType="12"/>
+      <column name="creatorId" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="accepted" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
     <table name="refs" schema="" catalog="bibliography_manager" type="TABLE">
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="author" sqlType="VARCHAR" precision="40" scale="0" nullable="false" jdbcType="12"/>

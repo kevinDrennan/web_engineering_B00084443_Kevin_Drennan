@@ -1,0 +1,63 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Bib Page {% endblock %}
+{# two pages, one for students and one for lecturers, lecturers can publish bibs #}
+
+{% block main %}
+    <main>
+        <br>
+        <a class="button" href="/proposeBibPage">--Create Bib--</a>
+        <h3>Current Public Bibs</h3>
+
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Get Details</th>
+                {% if role == 2 %}
+                    <th>Publish</th>
+                    <th>Edit Title or Summary</th>
+                {% endif %}
+            </tr>
+
+            {% for bib in allBibs %}
+                {% if bib.accepted == 1 %}
+                <tr>
+                    <td>{{ bib.id }}</td>
+                    <td>{{ bib.title}}</td>
+                    <td>{{ bib.summary }}</td>
+                    <td><a href="/viewBibDetails/{{ bib.id }}">view details</a></td>
+                    {% if role == 2 %}
+                        <td><a href="/publishBib/{{ bib.id }}">Publish Bib</a></td>
+                        <td><a href="/lecturerViewBibToModify/{{ bib.id }}">Edit</a></td>
+                    {% endif %}
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+
+        <h3>Current Published Bibs</h3>
+
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Summary</th>
+                <th>Get Details</th>
+            </tr>
+
+            {% for bib in allBibs %}
+                {% if bib.accepted == 2 %}
+                    <tr>
+                        <td>{{ bib.id }}</td>
+                        <td>{{ bib.title}}</td>
+                        <td>{{ bib.summary }}</td>
+                        <td><a href="/viewBibDetails/{{ bib.id }}">view details</a></td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        {{ message }}
+    </main>
+
+{% endblock %}

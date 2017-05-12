@@ -16,6 +16,7 @@ class AdminController
 
     public function adminViewAction()
     {
+        $userrole = $this->loginController->roleFromSession();
         $userCollegeId = $this->loginController->collegeIdFromSession();
         $collegeId = filter_input(INPUT_POST, 'collegeId', FILTER_SANITIZE_STRING);
         $user = UserRepository::getOneByCollegeId($collegeId);
@@ -28,6 +29,7 @@ class AdminController
             $template = 'admin/adminIndex';
             $message = 'Please enter college ID';
             $argsArray = [
+                'role' => $userrole,
                 'user' => $user,
                 'collegeId' => $userCollegeId,
                 'message' => $message
@@ -39,6 +41,7 @@ class AdminController
             $template = 'admin/adminIndex';
             $message = 'No match for the college ID entered';
             $argsArray = [
+                'role' => $userrole,
                 'user' => $user,
                 'collegeId' => $userCollegeId,
                 'message' => $message
@@ -55,6 +58,7 @@ class AdminController
 
         $template = 'admin/adminView';
         $argsArray = [
+            'role' => $userrole,
             'user' => $user,
             'collegeId' => $userCollegeId,
         ];
@@ -109,12 +113,14 @@ class AdminController
 
     public function registerAction()
     {
+        $userrole = $this->loginController->roleFromSession();
         $isLoggedIn = $this->loginController->isLoggedInFromSession();
         $collegeId = $this->loginController->collegeIdFromSession();
 
         $message = '';
         $template = 'admin/register';
         $argsArray = [
+            'role' =>$userrole,
             'collegeId' => $collegeId,
             'message' => $message
         ];
@@ -123,6 +129,7 @@ class AdminController
 
     public function updateUserAction($id)
     {
+        $userrole = $this->loginController->roleFromSession();
         $userCollegeId = $this->loginController->collegeIdFromSession();
         //$collegeId = filter_input(INPUT_POST, 'collegeId', FILTER_SANITIZE_STRING);
         $user = User::getOneById($id);
@@ -132,6 +139,7 @@ class AdminController
 
         $template = 'admin/adminUpdateUser';
         $argsArray = [
+            'role' =>$userrole,
             'user' => $user,
             'collegeId' => $userCollegeId
         ];
@@ -140,21 +148,19 @@ class AdminController
 
     public function updateUser($id)
     {
+        $userrole = $this->loginController->roleFromSession();
         $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING);
         $surname = filter_input(INPUT_POST, 'surname', FILTER_SANITIZE_STRING);
         $collegeId = filter_input(INPUT_POST, 'collegeId', FILTER_SANITIZE_STRING);
         $role = filter_input(INPUT_POST, 'role', FILTER_SANITIZE_STRING);
         $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
-        var_dump($surname);
         $user = User::getOneById($id);
-        var_dump($user);
         $user->firstName = $firstName;
         $user->surname = $surname;
         $user->collegeId = $collegeId;
         $user->role = $role;
         $user->email = $email;
 
-        var_dump($user);
         $updateSuccess = User::update($user);
         $userCollegeId = $this->loginController->collegeIdFromSession();
 
@@ -162,6 +168,7 @@ class AdminController
             $message = 'This record has been updated';
             $template = 'admin/adminIndex';
             $argsArray = [
+                'role' =>$userrole,
                 'message' => $message,
                 'user' => $user,
                 'collegeId' => $userCollegeId

@@ -1,0 +1,29 @@
+{% extends '_base.html.twig' %}
+{% block pageTitle %} Create Bib {% endblock %}
+
+{% block main %}
+    <main>
+        <section class="flexContainer">
+            <section class="smallFlex">
+                <form  action="/saveBib" method="post">
+                    <p>
+                        Title :
+                        <br>
+                        <input type="text" name="bibTitle" autocomplete="off" required>
+                    </p>
+
+                    <p>
+                        Summary :
+                        <br>
+                        <textarea rows="6" cols="80" name="bibSummary" required>
+                        </textarea>
+                    </p>
+                    <p>Click submit below to save and begin choosing refs for the bib</p>
+                <input type="submit" value="submit">
+                </form>
+            </section>
+        </section>
+        <br>
+        <i>{{ message }}</i>
+    </main>
+{% endblock %}

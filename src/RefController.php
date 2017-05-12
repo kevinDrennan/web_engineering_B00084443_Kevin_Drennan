@@ -2,6 +2,7 @@
 
 namespace Itb;
 
+use Itb\bib\BibRepository;
 use Itb\ref\RefRepository;
 use Itb\tag\TagRepository;
 
@@ -73,19 +74,24 @@ class RefController
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }
 
-
-
     public function viewRefs()
     {
+        $message = '';
         $role = $this->loginController->roleFromSession();
         $collegeId = $this->loginController->collegeIdFromSession();
         $refRepository = new RefRepository();
         $allRefs = $refRepository->getAll();
+        foreach($allRefs as $ref){
+            if($ref->creatorid == '0'){
+                $ref->creatorid = 'publicly added';
+            }
+        }
         $tagRepository = new TagRepository();
         $tags = $tagRepository->getTags();
 
         $template = 'studentLecturer/viewRefs';
         $argsArray = [
+            'message' => $message,
             'role' => $role,
             'tags' => $tags,
             'allRefs' => $allRefs,
@@ -101,22 +107,18 @@ class RefController
         $refRepository = new RefRepository();
         $ref = $refRepository->getOneById($id);
         $tagsForRef = $refRepository->getTagsForRef($id);
-        var_dump('inViewDetails');
-        var_dump($tagsForRef);
+        $bibRepository = new BibRepository();
+        $bibForRef = $bibRepository->getBibsForRef($id);
 
         $template = 'studentLecturer/refDetails';
         $argsArray = [
+            'bibForRef' => $bibForRef,
             'tagsForRef' => $tagsForRef,
             'role' => $role,
             'ref' => $ref,
             'collegeId' => $collegeId
         ];
         return $this->app['twig']->render($template . '.html.twig', $argsArray);
-    }
-
-    public function viewPersonalRefs()
-    {
-
     }
 
     public function searchRefsByTags()
@@ -132,7 +134,7 @@ class RefController
          */
         if($referenceIds == 0){
             $message = 'no tags were chosen';
-            $template = 'studentLecturer/searchResults';
+            $template = 'studentLecturer/viewRefs';
             $refArray = null;
             $argsArray = [
                 'message' => $message,
@@ -150,7 +152,7 @@ class RefController
         $refArray = array();
         $refArray = $this->getRefsDetailsFromIds($referenceIds);
 
-        $template = 'studentLecturer/searchResults';
+        $template = 'studentLecturer/viewRefs';
         $argsArray = [
             'message' => $message,
             'role' => $role,
@@ -207,7 +209,7 @@ class RefController
         $columnName = 'summary';
         $ref = $refRepository->searchByColumn($columnName, $freeText);
 
-        $template = 'studentLecturer/searchResults';
+        $template = 'studentLecturer/viewRefs';
         $argsArray = [
             'message' => $message,
             'role' => $role,

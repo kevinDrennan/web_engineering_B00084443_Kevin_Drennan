@@ -2,6 +2,7 @@
 
 namespace Itb;
 
+use Itb\tag\Tag;
 use Itb\tag\TagRepository;
 
 class TagController
@@ -16,6 +17,7 @@ class TagController
 
     public function processProposedTagAction()
     {
+        $role = $this->loginController->roleFromSession();
         $proposedTag = filter_input(INPUT_POST, 'proposedTag', FILTER_SANITIZE_STRING);
         $tagDescription = filter_input(INPUT_POST, 'tagDescription', FILTER_SANITIZE_STRING);
         $collegeId = $this->loginController->collegeIdFromSession();
@@ -34,6 +36,7 @@ class TagController
 
         $template = 'proposeTag';
         $argsArray = [
+            'role' => $role,
             'collegeId' => $collegeId,
             'message' => $message,
             'isLoggedIn' => $isLoggedIn
@@ -94,6 +97,7 @@ class TagController
 
     public function getVariablesForViewProposedTags()
     {
+        $role = $this->loginController->roleFromSession();
         $proposedTagRepository = new TagRepository();
         $proposedTags = $proposedTagRepository->returnAllTags();
 
@@ -101,11 +105,27 @@ class TagController
 
         $template = 'viewProposedTags';
         $argsArray = [
+            'role' => $role,
             'collegeId' => $collegeId,
             'proposedTags' => $proposedTags
         ];
 
         $array = array($template, $argsArray);
         return $array;
+    }
+
+    public function publishTag($id)
+    {
+        $tag = Tag::getOneById($id);
+        $tag->accepted = 1;
+        Tag::update($tag);
+        /*
+         * $array returns index 0 = template, index 1 = tag objects
+         */
+        $array = $this->getVariablesForViewProposedTags();
+        $template = $array[0];
+        $argsArray = $array[1];
+
+        return $this->app['twig']->render($template . '.html.twig', $argsArray);
     }
 }

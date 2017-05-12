@@ -3,7 +3,9 @@
 namespace Itb\tag;
 
 
-class Tag
+use Mattsmithdev\PdoCrudRepo\DatabaseTable;
+
+class Tag extends DatabaseTable
 {
     private $id;
     private $tagName;
